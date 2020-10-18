@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Searcher from '@/components/Searcher.vue';
 import Details from '@/components/Details.vue';
 import NotFound from '@/components/NotFound.vue';
 
@@ -10,10 +9,9 @@ export default new VueRouter({
   routes: [
       {
           path: '/', 
-          component: Searcher,
       },
       {
-          path: '/', 
+          path: '/details', 
           component: Details,
       },
       {
