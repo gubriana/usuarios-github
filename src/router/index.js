@@ -8,10 +8,10 @@ Vue.use(VueRouter);
 export default new VueRouter({
   routes: [
       {
-          path: '/',
+          path: '/', 
       },
       {
-          path: '/details/', 
+          path: '/details', 
           component: Details,
       },
       {
