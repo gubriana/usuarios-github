@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h1 class="primary-color">Usuario no encontrado :(</h1>
+    <h1 class="primary-color center-text">Usuario no encontrado :(</h1>
   </div>
 </template>
 <script>
@@ -9,4 +9,8 @@
   }
 </script>
 <style scoped>
+.center-text {
+  display: flex;
+  justify-content: center;
+}
 </style>

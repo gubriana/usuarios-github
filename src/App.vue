@@ -1,16 +1,32 @@
 <template>
   <div class="app frame">
-    <form class="form-user">
+    <form class="search-form">
       <h1 class="title">Github <span>Search</span></h1>
         <input class="form-field shadow" type="text" v-model="userLogin">
-        <button class="btn shadow bg-primary-color" type="button" @click="sendUser"> lupa</button>
+        <button class="btn shadow bg-primary-color" type="button" @click.prevent="sendUser"> buscar</button>
     </form>
+
+      <p>{{ count }}</p>
+       <li v-for="movie in comedyMovies" :key="movie.id">{{ movie.title }}</li>
+       
+          <p>{{algo}}</p>
     <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+      userAvatar: '',
+      userName: '',
+      userLogin: '',
+      userFollowers: '',
+      userEmail: '',
+      userBio: '',
+      userRepos: [],
+    }
+  },
   methods: {
     sendUser() {
       this.axios.get(`https://api.github.com/users/${this.userLogin}`)
@@ -24,7 +40,7 @@ export default {
       })
       .catch((error) => {
         console.log(error);
-        this.$router.push('/not-found')
+        this.$router.push('/*')
       })
       this.axios.get(`https://api.github.com/users/${this.userLogin}/repos`)
       .then((datos) => {
@@ -34,18 +50,15 @@ export default {
       })
     }
   },
-  data() {
-    return {
-      userAvatar: '',
-      userName: '',
-      userLogin: '',
-      userFollowers: '',
-      userEmail:'',
-      userBio: '',
-      userRepos: [],
+  computed: {
+    count() {
+      return this.$store.state.count
+    },
+    comedyMovies() {
+      return this.$store.state.movies.filter(movie => movie.genre === "Comedy");
     }
   }
-}
+} 
 </script>
 <style>
 h1 {
@@ -90,11 +103,12 @@ a {
   font-family: Montserrat, Helvetica, Arial, sans-serif;
 }
 .form-field {
-  width: 90%;
+  width: 80%;
   height: 40px;
   border: 0;
   border-radius: 4px 0px 0px 4px;
   box-shadow: 5px 10px #888888;
+  padding: 0 10px 0 10px;
 }
 .btn {
   height: 40px;
@@ -104,5 +118,9 @@ a {
 }
 .shadow {
  box-shadow: 0px 0px 9px 0px rgba(170,170,170,1);
+}
+.search-form {
+  width: 100%;
+  text-align: center;
 }
 </style>

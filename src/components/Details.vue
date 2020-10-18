@@ -4,7 +4,7 @@
       <li class="user">
         <img class="img-avatar" :src="userAvatar" alt="">
         <h1>{{userName}}</h1>
-        <p class="user-name"> {{userLogin}}</p>
+        <p class="user-name" v-bind="userLogin"> {{userLogin}}</p>
         <p>Seguidores: {{userFollowers}}</p>
         <p>Email: {{userEmail}}</p>
         <p>Bio: {{userBio}}</p>
@@ -16,6 +16,7 @@
         </div>
       </li>
     </ul> 
+    <p>{{algo}}</p>
   </div>
 </template>
 <script>
@@ -29,6 +30,17 @@ export default {
     userEmail: String,
     userBio: String,
     userRepos: Array,
+  },
+  computed: {
+    count() {
+      return this.$store.state.count
+    },
+    comedyMovies() {
+      return this.$store.state.movies.filter(movie => movie.genre === "Comedy");
+    },
+    algo() {
+      return this.$store.state.algo
+    }
   }
 }
 </script>
@@ -53,6 +65,5 @@ p {
 ul li {
   display:inline;
   vertical-align:top;
-
 }
 </style>
