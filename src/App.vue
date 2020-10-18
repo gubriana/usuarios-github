@@ -11,17 +11,6 @@
 <script>
 export default {
   name: 'App',
-  data() {
-    return {
-      userAvatar: '',
-      userName: '',
-      userLogin: '',
-      userFollowers: '',
-      userEmail:'',
-      userBio: '',
-      userRepos: [],
-    }
-  },
   methods: {
     sendUser() {
       this.axios.get(`https://api.github.com/users/${this.userLogin}`)
@@ -34,13 +23,26 @@ export default {
         this.userBio = user.bio;
       })
       .catch((error) => {
-        alert(error);
+        console.log(error);
+        this.$router.push('/not-found')
       })
       this.axios.get(`https://api.github.com/users/${this.userLogin}/repos`)
       .then((datos) => {
         const repos = datos.data;
         this.userRepos = repos;
+        this.$router.push('/details')
       })
+    }
+  },
+  data() {
+    return {
+      userAvatar: '',
+      userName: '',
+      userLogin: '',
+      userFollowers: '',
+      userEmail:'',
+      userBio: '',
+      userRepos: [],
     }
   }
 }
