@@ -13,6 +13,12 @@ export default {
   name: 'App',
   methods: {
     sendUser() {
+      console.log('enviar usuario');
+      let userlogin =  {
+        userlogin: this.userlogin,
+      }
+      this.$store.dispatch('enviarLog',userlogin)
+/* 
       this.axios.get(`https://api.github.com/users/${this.userLogin}`)
       .then((datos) => {
         const user = datos.data;
@@ -32,20 +38,18 @@ export default {
         this.userRepos = repos;
         this.$router.push('/details')
       })
-      this.$store.commit('writeCount')    
-    }
-    
+      this.$store.commit('writeCount'); */
+    } 
   },
   data() {
     return {
-      userAvatar: '',
-      userName: '',
-      userLogin: '',
-      userFollowers: '',
+      /* userAvatar: '',
+      userName: '', */
+      userLogin: ''
+      /* userFollowers: '',
       userEmail:'',
       userBio: '',
-      userRepos: [],
-      inputData: {}
+      userRepos: [], */
     }
   }
 }
